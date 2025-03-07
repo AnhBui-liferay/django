@@ -40,15 +40,3 @@ spec:
       volumes:
       - name: esdata
         emptyDir: {}
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: elasticsearch
-spec:
-  selector:
-    app: elasticsearch
-  ports:
-  - protocol: TCP
-    port: 9200
-    targetPort: 9200
