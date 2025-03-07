@@ -1,0 +1,9 @@
+django
+djangorestframework
+django-elasticsearch-dsl
+django-elasticsearch-dsl-drf
+boto3
+django-storages
+elasticsearch
+Pillow
+requests

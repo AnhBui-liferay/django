@@ -1,0 +1,31 @@
+services:
+  web:
+    build: .
+    container_name: django_app
+    depends_on:
+      - elasticsearch
+    environment:
+      - DEBUG=1
+      - DATABASE_URL=sqlite:///db.sqlite3
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    restart: always
+  elasticsearch:
+    image: elasticsearch:8.15.1
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms1g -Xmx1g  # Increase heap memory
+      - cluster.routing.allocation.disk.watermark.flood_stage=5gb
+      - cluster.routing.allocation.disk.watermark.high=10gb
+      - cluster.routing.allocation.disk.watermark.low=15gb
+    volumes:
+      - esdata01:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+
+volumes:
+  esdata01:

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blog List</title>
+</head>
+<body>
+    <h1>Blog Posts</h1>
+
+    <!-- Search Form -->
+    <form method="GET" action="{% url 'search_blog' %}">
+        <input type="text" name="query" placeholder="Search blogs..." value="{{ request.GET.query }}">
+        <button type="submit">Search</button>
+    </form>
+
+    <a href="{% url 'create_blog' %}">Create New Blog</a>
+    
+    <ul>
+        {% for blog in blogs %}
+            <li>
+                <h3>{{ blog.title }}</h3>
+                <p>{{ blog.content }}</p>
+                <form action="{% url 'delete_blog' blog.id %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        {% empty %}
+            <p>No blog posts found.</p>
+        {% endfor %}
+    </ul>
+</body>
+</html>
