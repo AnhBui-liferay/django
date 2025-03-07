@@ -4,7 +4,7 @@ metadata:
   name: django-app
   namespace: django
 spec:
-  replicas: 3  # Multiple instances
+  replicas: 5  # Multiple instances
   selector:
     matchLabels:
       app: django
